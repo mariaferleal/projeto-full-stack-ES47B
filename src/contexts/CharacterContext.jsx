@@ -169,20 +169,26 @@ export function CharacterProvider({ children }) {
 
         const remainingResults = await Promise.all(
           remainingPages.map(async (catalogPage) => {
-            const response = await fetchWithRetry([
-              `${API_URL}?page=${catalogPage}`,
-              `${API_URL}/?page=${catalogPage}`,
-            ])
+            try {
+              const response = await fetchWithRetry([
+                `${API_URL}?page=${catalogPage}`,
+                `${API_URL}/?page=${catalogPage}`,
+              ])
 
-            if (!response.ok) {
-              throw new Error('Falha ao carregar catalogo de personagens.')
+              if (!response.ok) {
+                return null
+              }
+
+              return response.json()
+            } catch {
+              return null
             }
-
-            return response.json()
           }),
         )
 
-        return [firstPage, ...remainingResults].flatMap((catalogPage) => catalogPage.results)
+        return [firstPage, ...remainingResults]
+          .filter(Boolean)
+          .flatMap((catalogPage) => catalogPage.results)
       })().catch((catalogError) => {
         characterCatalogPromise = null
         throw catalogError
@@ -258,7 +264,10 @@ export function CharacterProvider({ children }) {
       } catch (fallbackError) {
         dispatch({
           type: 'SET_ERROR',
-          payload: fallbackError.message || requestError.message,
+          payload:
+            fallbackError.message && fallbackError.message !== 'Failed to fetch'
+              ? fallbackError.message
+              : 'Falha ao consultar a API. Tente novamente em instantes.',
         })
       }
     }
