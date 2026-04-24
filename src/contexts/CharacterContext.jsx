@@ -244,10 +244,23 @@ export function CharacterProvider({ children }) {
         },
       })
     } catch (requestError) {
-      dispatch({
-        type: 'SET_ERROR',
-        payload: requestError.message,
-      })
+      try {
+        const fallbackData = await fetchCharactersFromCatalog(filters, page)
+
+        dispatch({
+          type: 'SET_SUCCESS',
+          payload: {
+            results: fallbackData.results,
+            info: fallbackData.info,
+            page,
+          },
+        })
+      } catch (fallbackError) {
+        dispatch({
+          type: 'SET_ERROR',
+          payload: fallbackError.message || requestError.message,
+        })
+      }
     }
   }
 
