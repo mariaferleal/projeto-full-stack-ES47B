@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useReducer } from 'react'
 
-const API_URL = 'https://rickandmortyapi.com/api/character'
+const API_URL = '/api/character'
 
 const CharacterContext = createContext(null)
 
