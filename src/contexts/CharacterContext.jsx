@@ -221,7 +221,7 @@ export function CharacterProvider({ children }) {
 
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error('Nenhum personagem encontrado para a busca informada.')
+          throw new Error('Nenhum personagem encontrado para a busca informada. Informe outro nome.')
         }
 
         const fallbackData = await fetchCharactersFromCatalog(filters, page)
