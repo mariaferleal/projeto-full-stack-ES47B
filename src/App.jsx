@@ -14,27 +14,66 @@ function App() {
       <header className="app-header">
         <h1>Buscador Rick and Morty</h1>
         <p>
-          By Maria Fernanda Leal Pinheiro.
+          By Maria Fernanda Leal Pinheiro
         </p>
       </header>
 
-      <SearchForm />
+      <div className="main-content">
+        <aside className="sidebar">
+          <SearchForm />
+        </aside>
+        <section className="results-section">
+          {loading && <Loading />}
+          {!loading && error && <ErrorMessage message={error} />}
 
-      {loading && <Loading />}
-      {!loading && error && <ErrorMessage message={error} />}
+          {!loading && !error && hasSearched && (
+            <>
+              <CharacterList characters={characters} />
+              <Pagination
+                info={info}
+                currentPage={currentPage}
+                onPageChange={goToPage}
+                loading={loading}
+              />
+            </>
+          )}
 
-      {!loading && !error && hasSearched && (
-        <>
-          <CharacterList characters={characters} />
-          <Pagination info={info} currentPage={currentPage} onPageChange={goToPage} />
-        </>
-      )}
+          {!loading && !hasSearched && (
+            <section className="card card--results-box">
+              <h2 className="panel-title">Resultados</h2>
+              <p className="empty-state empty-state--in-card">
+                Preencha os campos ao lado e clique em buscar para consultar a API.
+              </p>
+            </section>
+          )}
+        </section>
+      </div>
 
-      {!loading && !hasSearched && (
-        <p className="empty-state">
-          Preencha os campos acima e clique em buscar para consultar a API.
-        </p>
-      )}
+      <footer className="app-footer">
+        <div className="footer-slime-wave" aria-hidden="true">
+          <img
+            className="footer-slime-wave__img"
+            src={`${import.meta.env.BASE_URL}footer-slime-wave.svg`}
+            alt=""
+            width={1200}
+            height={64}
+            decoding="async"
+          />
+        </div>
+        <div className="footer-content">
+          <p>
+            Dados da{' '}
+            <a
+              href="https://rickandmortyapi.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              The Rick and Morty API
+            </a>
+            . Wubba lubba dub dub!
+          </p>
+        </div>
+      </footer>
     </main>
   )
 }

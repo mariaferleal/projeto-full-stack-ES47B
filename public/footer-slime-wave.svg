@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 64" preserveAspectRatio="none" role="presentation">
+  <defs>
+    <linearGradient id="wave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a9c4a"/>
+      <stop offset="0.5" stop-color="#3d6b35"/>
+      <stop offset="1" stop-color="#2a4a24"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#wave)" d="M0,28 C120,8 240,40 360,22 S600,4 720,26 S960,48 1080,18 S1140,8 1200,24 L1200,64 L0,64 Z"/>
+  <circle cx="140" cy="42" r="9" fill="#97ce4c" opacity="0.55"/>
+  <circle cx="320" cy="48" r="6" fill="#b8e86a" opacity="0.5"/>
+  <circle cx="520" cy="38" r="11" fill="#97ce4c" opacity="0.45"/>
+  <circle cx="780" cy="44" r="7" fill="#c5e86b" opacity="0.5"/>
+  <circle cx="980" cy="36" r="8" fill="#97ce4c" opacity="0.48"/>
+  <circle cx="1120" cy="46" r="5" fill="#b8e86a" opacity="0.45"/>
+  <ellipse cx="220" cy="52" rx="14" ry="8" fill="#97ce4c" opacity="0.25"/>
+  <ellipse cx="640" cy="54" rx="18" ry="9" fill="#7cb342" opacity="0.3"/>
+</svg>
