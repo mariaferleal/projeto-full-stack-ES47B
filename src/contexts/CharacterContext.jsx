@@ -220,23 +220,21 @@ export function CharacterProvider({ children }) {
       ])
 
       if (!response.ok) {
-        if (response.status === 526) {
-          const fallbackData = await fetchCharactersFromCatalog(filters, page)
-
-          dispatch({
-            type: 'SET_SUCCESS',
-            payload: {
-              results: fallbackData.results,
-              info: fallbackData.info,
-              page,
-            },
-          })
-          return
-        }
         if (response.status === 404) {
           throw new Error('Nenhum personagem encontrado para a busca informada.')
         }
-        throw new Error('Falha ao consultar a API. Tente novamente em instantes.')
+
+        const fallbackData = await fetchCharactersFromCatalog(filters, page)
+
+        dispatch({
+          type: 'SET_SUCCESS',
+          payload: {
+            results: fallbackData.results,
+            info: fallbackData.info,
+            page,
+          },
+        })
+        return
       }
 
       const data = await response.json()
