@@ -1,10 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useReducer } from 'react'
 
-const API_URL =
-  window.location.hostname === 'localhost'
-    ? '/api/character'
-    : 'https://rickandmortyapi.com/api/character'
+const API_URL = 'https://rickandmortyapi.com/api/character'
 const PAGE_SIZE = 20
 
 let characterCatalogPromise = null
